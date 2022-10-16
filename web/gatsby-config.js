@@ -5,7 +5,7 @@ require("dotenv").config({
 
 const clientConfig = require("./client-config");
 
-const isProd = process.env.NODE_ENV === "development";
+const isProd = process.env.NODE_ENV === "production";
 
 module.exports = {
   plugins: [
@@ -18,8 +18,8 @@ module.exports = {
         projectId: `tni5svlg`,
         ...clientConfig.sanity,
         token: process.env.SANITY_READ_TOKEN,
-        watchMode: true, // watchMode only in dev mode
-      overlayDrafts: true || previewEnabled, // drafts in dev & Gatsby Cloud Preview
+        watchMode: !isProd, // watchMode only in dev mode
+      overlayDrafts: !isProd || previewEnabled, // drafts in dev & Gatsby Cloud Preview
       },
     },
   ],
